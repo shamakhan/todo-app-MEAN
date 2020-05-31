@@ -1,0 +1,17 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    width: 100%;
+    button {
+      border: none;
+      align-self: center;
+    }
+
+    .invalid-feedback {
+      display: block;
+    }
+  }
+}

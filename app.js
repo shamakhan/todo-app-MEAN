@@ -22,7 +22,7 @@ const appUrl = process.env.APP_URL || "http://localhost";
 const port = process.env.PORT || 3000;
 
 // Register Middlewares
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 
 // Serve static files

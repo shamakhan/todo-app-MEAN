@@ -4,3 +4,18 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.confirm-btn {
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  margin-left: 10px;
+  padding: 10px 20px;
+  background: #6f921d;
+  border-radius: 4px;
+  box-shadow: 1px 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.required-indicator {
+  color: red;
+}
