@@ -51,6 +51,7 @@ router.post("/login", (req, res, next) => {
           res.json({
             status: "success",
             token: "JWT " + token,
+            expiresIn: 86400,
             user: {
               name: user.name,
               username: user.username,

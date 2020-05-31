@@ -13,6 +13,9 @@ import { RegisterComponent } from './components/register/register.component';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthGuard } from './guards/auth.guard';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { AuthService } from './services/auth.service';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,7 @@ import { AuthService } from './services/auth.service';
     HttpModule,
     FlashMessagesModule
   ],
-  providers: [ValidateService, AuthService, FlashMessagesService],
+  providers: [ValidateService, AuthService, FlashMessagesService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
