@@ -53,6 +53,7 @@ router.post("/login", (req, res, next) => {
             token: "JWT " + token,
             expiresIn: 86400,
             user: {
+              id: user._id,
               name: user.name,
               username: user.username,
               email: user.email

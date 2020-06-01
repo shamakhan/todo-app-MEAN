@@ -6,6 +6,7 @@ const passport = require("passport");
 
 const config = require("./config/app");
 const userRoutes = require("./routes/users");
+const taskRoutes = require("./routes/tasks");
 
 mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.on("connected", () => {
@@ -32,6 +33,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 app.use("/api/users", userRoutes);
+app.use("/api/tasks", passport.authenticate("jwt", { session: false }), taskRoutes);
 
 app.listen(port, () => {
   console.log(`Server started on ${appUrl}:${port}`);

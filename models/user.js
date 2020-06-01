@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
+const Task = require('./task');
+
 const UserSchema = mongoose.Schema({
   name: {
     type: "String"
@@ -17,10 +19,16 @@ const UserSchema = mongoose.Schema({
   password: {
     type: "String",
     required: true,
-  }
+  },
+  tasks : [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Task'
+    }
+  ]
 });
 
-const User = module.exports = mongoose.model("user", UserSchema);
+const User = module.exports = mongoose.model("User", UserSchema);
 
 module.exports.getUserByUsername = (username, callback) => {
   const query = { username: username };
@@ -45,3 +53,37 @@ module.exports.comparePassword = (userPassword, hash, callback) => {
     callback(isMatch);
   });
 };
+
+module.exports.getTasks = (id, callback) => {
+  User.findById(id, (err, user) => {
+    if(err) throw err;
+    Task.getTasksByIds(user.tasks, callback);
+  })
+};
+
+module.exports.addTask = (id, newTask, callback) => {
+  Task.addTask(newTask, (err, task) => {
+    if (err) throw err;
+    User.findById(id, (err, user) => {
+      if (err) throw err;
+      if (user) {
+        user.tasks.push(task._id);
+        user.save();
+        callback(null, task);
+      } else {
+        callback(null, false);
+      }
+    })
+  })
+}
+
+module.exports.deleteTask = (userId, taskId, callback) => {
+  User.findById(userId, (err, user) => {
+    if (err) throw err;
+    if (user) {
+      user.tasks = user.tasks.filter((t) => t !== taskId);
+      user.save();
+      Task.delete(taskId, callback);
+    }
+  })
+}
