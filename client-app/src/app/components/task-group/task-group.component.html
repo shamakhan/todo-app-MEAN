@@ -1,0 +1,13 @@
+<section class="task-list" >
+  <a  class="list-collapse-btn" data-toggle="collapse" [href]="'#'+listId" role="button" aria-expanded="true" [attr.aria-controls]="listId" (click)="toggleListCollapse()">
+    <div class="task-group-header">
+    {{groupName}} Tasks
+      <mat-icon>{{ collapsed ? "arrow_drop_down" : "arrow_drop_up" }}</mat-icon>
+    </div>
+  </a>
+  <div class="collapse show" [id]="listId">
+    <div class="card card-body">
+      <app-task-item *ngFor="let task of tasks" [task]="task" (editTask)="onTaskEdit($event)" (deleteTask)="onTaskDelete($event)" (changeTaskStatus)="onTaskStatusChange($event)"></app-task-item>
+    </div>
+  </div>
+</section>

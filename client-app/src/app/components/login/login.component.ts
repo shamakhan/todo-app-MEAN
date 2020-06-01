@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       this.flashMessage.show("Please fill all fields", { cssClass: "alert alert-danger" });
       return;
     }
-    this.authService.authenticateUser(user).subscribe((data) => {
+    this.authService.authenticateUser(user).subscribe((data: any) => {
       if (data.status == "success") {
         this.authService.storeUserData(data);
         this.router.navigate(['dashboard']);

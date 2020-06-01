@@ -1,0 +1,35 @@
+<div class="list-item">
+  <div class="d-flex flex-row justify-content-between">
+    <span class="title">
+      <mat-icon>double_arrow</mat-icon>
+      {{task.title}}
+    </span>
+    
+    <div class="action-buttons">
+      <select class="custom-select col-sm-8" id="inputGroupSelect01" name="status" [(ngModel)]="status" (change)="onStatusChange()">
+        <option *ngFor="let status of statuses" [value]="status.value">{{status.label}}</option>
+      </select>
+      <button class="btn btn-default" (click)="editTaskClicked()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button class="btn btn-default" (click)="onDeleteClick()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="d-flex flex-row justify-content-between">
+    <a  class="list-collapse-btn" *ngIf="task.description" data-toggle="collapse" [href]="'#description'+task._id" role="button" aria-expanded="false" [attr.aria-controls]="'description'+task._id">
+      Description
+    </a>
+    <div class="labels-list">
+      <span *ngFor="let label of objectEntries(task.labels)" [className]="'label badge-' + label[1]" >
+        {{label[0]}}
+      </span>
+    </div>
+  </div>
+  <div class="collapse" [id]="'description'+task._id">
+    <div class="card card-body">
+      {{task.description}}
+    </div>
+  </div>
+</div>

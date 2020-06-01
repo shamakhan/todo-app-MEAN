@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
       this.flashMessage.show("Please enter a valid email", { cssClass: "alert alert-danger" });
       return;
     }
-    this.authService.registerUser(user).subscribe((data) => {
+    this.authService.registerUser(user).subscribe((data: any) => {
       // console.log(data);
       this.flashMessage.show(data.message, { cssClass: `alert ${data.status === 'success' ? 'alert-success' : 'alert-danger'}`});
       if (data.status === "success") {

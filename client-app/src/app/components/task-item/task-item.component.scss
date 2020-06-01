@@ -1,0 +1,38 @@
+.list-item {
+  padding: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+
+  .title {
+    display: flex;
+    align-items: center;
+  }
+
+  .labels-list {
+    margin-left: auto;
+  }
+  .label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+
+  .action-buttons {
+    margin-bottom: 8px;
+    .custom-select {
+      height: unset;
+      padding: .2rem 0.6rem;
+      width: 8rem;
+    }
+    .btn {
+      padding: 0;
+      margin-left: 10px;
+    }
+  }
+
+  .card.card-body {
+    margin-top: 10px;
+  }
+}

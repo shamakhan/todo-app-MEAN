@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+// import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
@@ -11,24 +12,20 @@ export class AuthService {
   user: any;
   apiEndpoint: string = 'http://localhost:3000';
   userApiRoot: string = '/api/users';
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getUserApi(route) {
     return `${this.apiEndpoint}${this.userApiRoot}${route}`;
   }
 
   registerUser(user) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.getUserApi('/register'), user, {headers: headers})
-      .pipe(map(res => res.json()));
+    return this.http.post(this.getUserApi('/register'), user);
   }
 
   authenticateUser(user) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.getUserApi('/login'), user, {headers: headers})  
-      .pipe(map(res => res.json()));
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    return this.http.post(this.getUserApi('/login'), user);
   }
 
   storeUserData(data) {
@@ -40,6 +37,10 @@ export class AuthService {
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
+  getToken() {
+    return localStorage.getItem('id_token');
+  }
+
   logout() {
     this.authToken = null;
     this.user = null;
@@ -47,7 +48,11 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+    const tokenExpired = !(moment().isBefore(this.getExpiration()));
+    if (tokenExpired) {
+      localStorage.clear();
+    }
+    return !tokenExpired;
   }
 
   getExpiration() {

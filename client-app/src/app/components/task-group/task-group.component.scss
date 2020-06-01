@@ -1,0 +1,24 @@
+.task-list {
+  .task-group-header {
+    padding: 10px 20px;
+    border: 1px solid #888;
+    border-radius: 4px 4px 0 0;
+    background: #aaa;
+
+    .mat-icon {
+      float: right;
+    }
+
+  }
+  .list-collapse-btn {
+    text-decoration: none;
+    color: #000;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .card.card-body {
+    padding: 0;
+  }
+}

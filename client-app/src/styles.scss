@@ -21,6 +21,16 @@
   }
 }
 
+button.confirm-btn {
+  border: none;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
 .required-indicator {
   color: red;
 }
