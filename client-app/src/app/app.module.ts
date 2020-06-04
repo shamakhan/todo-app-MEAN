@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { FlashMessagesService, FlashMessagesModule } from 'angular2-flash-messages';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {DpDatePickerModule} from 'ng2-date-picker'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,7 +47,8 @@ import { TaskItemComponent } from './components/task-item/task-item.component';
     ReactiveFormsModule,
     HttpModule,
     FlashMessagesModule,
-    MatIconModule
+    MatIconModule,
+    DpDatePickerModule
   ],
   providers: [
     ValidateService,

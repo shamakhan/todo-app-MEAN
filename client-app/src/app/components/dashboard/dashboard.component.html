@@ -1,23 +1,26 @@
 <app-add-task (taskAdded)="taskAdded($event)"></app-add-task>
-<app-task-group
-  groupName="New"
-  [tasks]="tasks['new']"
-  (editTask)="editTask($event)"
-  (deleteTask)="deleteTask($event)"
-  (changeTaskStatus)="changeTaskStatus($event)"
-></app-task-group>
-<app-task-group
-  groupName="In_progress"
-  [tasks]="tasks['in_progress']"
-  (editTask)="editTask($event)"
-  (deleteTask)="deleteTask($event)"
-  (changeTaskStatus)="changeTaskStatus($event)"
-></app-task-group>
-<app-task-group
-  groupName="Completed"
-  [tasks]="tasks['completed']"
-  (editTask)="editTask($event)"
-  (deleteTask)="deleteTask($event)"
-  (changeTaskStatus)="changeTaskStatus($event)"
-></app-task-group>
+<div class="task-list-wrapper">
+  <app-task-group
+    groupName="New"
+    [tasks]="tasks['new']"
+    (editTask)="editTask($event)"
+    (deleteTask)="deleteTask($event)"
+    (changeTaskStatus)="changeTaskStatus($event)"
+  ></app-task-group>
+  <app-task-group
+    groupName="In_progress"
+    [tasks]="tasks['in_progress']"
+    (editTask)="editTask($event)"
+    (deleteTask)="deleteTask($event)"
+    (changeTaskStatus)="changeTaskStatus($event)"
+  ></app-task-group>
+  <app-task-group
+    groupName="Completed"
+    [tasks]="tasks['completed']"
+    (editTask)="editTask($event)"
+    (deleteTask)="deleteTask($event)"
+    (changeTaskStatus)="changeTaskStatus($event)"
+    [showDueDate]="false"
+  ></app-task-group>
+</div>
 <app-task-settings *ngIf="taskToEdit" [settings]="taskToEdit" (saved)="taskEdited($event)" (close)="closeEditDialog()"></app-task-settings>

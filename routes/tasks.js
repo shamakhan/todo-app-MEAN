@@ -21,6 +21,7 @@ router.post("/save", (req, res, next) => {
       description: req.body.description || '',
       status: req.body.status || 'new',
       labels: req.body.labels || [],
+      dueDate: req.body.dueDate || '',
     };
     Task.updateTask(updatedTask, (err, task) => {
       if (err) throw err;
@@ -37,6 +38,7 @@ router.post("/save", (req, res, next) => {
       description: req.body.description || '',
       status: req.body.status || 'new',
       labels: req.body.labels || [],
+      dueDate: req.body.dueDate || '',
       user: userId,
     });
     User.addTask(userId, task, (err, task) => {

@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class TaskGroupComponent implements OnInit {
   @Input() tasks;
   @Input() groupName;
+  @Input() showDueDate: boolean = true;
   @Output() editTask: EventEmitter<any> = new EventEmitter();
   @Output() deleteTask: EventEmitter<any> = new EventEmitter();
   @Output() changeTaskStatus: EventEmitter<any> = new EventEmitter();

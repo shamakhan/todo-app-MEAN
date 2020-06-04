@@ -1,7 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
 import { staticLabels, statuses } from './constants';
-import {FormControl} from '@angular/forms';
+import * as moment from 'moment';
+import { IDatePickerConfig } from 'ng2-date-picker';
+
 // import { FormControl, FormGroup, FormBuilder, Validator, Validators,ReactiveFormsModule } from "@angular/forms";
 @Component({
   selector: 'app-task-settings',
@@ -22,17 +24,25 @@ export class TaskSettingsComponent implements OnInit {
   customLabel: string;
   customLabelType: String = 'success';
   statuses: Array<object> = statuses;
-  dueDate: any = new FormControl(new Date());
-  minDate: Date;
-  maxDate: Date;
-
-  constructor(private taskService: TasksService) { }
+  dueDate: string = '';
+  minDate: any;
+  datePickerConfig: IDatePickerConfig;
+  datepickerDate: any;
+  constructor(private taskService: TasksService) {
+    this.datePickerConfig = {
+      format: "YYYY-MM-DD"
+    };
+   }
+  
 
   ngOnInit(): void {
     this.title = this.settings.title;
     this.description = this.settings.description;
     this.status = this.settings.status || 'new';
     this.labels = this.settings.labels || {};
+    this.dueDate = this.settings.dueDate;
+    this.minDate = moment();
+    this.datepickerDate = this.settings.dueDate ? moment(this.settings.dueDate) : '';
     if (this.labels instanceof Array) {
       this.labels = {};
     }
@@ -42,28 +52,25 @@ export class TaskSettingsComponent implements OnInit {
       }
       return acc;
     },{}) : Object.assign({}, staticLabels);
-    const today = new Date();
-    this.minDate = new Date();
-    // this.maxDate = new Date(currentYear + 1, 11, 31);
   }
   closeSettings() {
     this.close.emit();
   }
 
   saveTask() {
-    // console.log(this.taskSettings, this.taskSettings.dueDate);
-    // const task = {
-    //   id: this.settings._id,
-    //   title: this.title,
-    //   description: this.description,
-    //   labels: this.labels,
-    //   status: this.status
-    // };
-    // this.taskService.saveTask(task).subscribe((data: any) => {
-    //   if (data.success) {
-    //     this.saved.emit(data.task);
-    //   }
-    // })
+    const task = {
+      id: this.settings._id,
+      title: this.title,
+      description: this.description,
+      labels: this.labels,
+      status: this.status,
+      dueDate: this.dueDate
+    };
+    this.taskService.saveTask(task).subscribe((data: any) => {
+      if (data.success) {
+        this.saved.emit(data.task);
+      }
+    })
   }
 
   toggleLabelAddForm() {
@@ -88,5 +95,13 @@ export class TaskSettingsComponent implements OnInit {
   addCustomLabel() {
     this.labels[this.customLabel] = this.customLabelType;
     this.customLabel = '';
+  }
+
+  onDueDateChange(e) {
+    if (e) {
+      this.dueDate = e.format("YYYY-MM-DD");
+    } else {
+      this.dueDate = '';
+    }
   }
 }

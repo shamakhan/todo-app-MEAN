@@ -1,4 +1,8 @@
 .task-list {
+  min-height: 500px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+
   .task-group-header {
     padding: 10px 20px;
     border: 1px solid #888;
@@ -9,6 +13,15 @@
       float: right;
     }
 
+    &.new {
+      background: #ded7b1;
+    }
+    &.in_progress {
+      background: #a7c9ce;
+    }
+    &.completed {
+      background: #b9dac1;
+    }
   }
   .list-collapse-btn {
     text-decoration: none;

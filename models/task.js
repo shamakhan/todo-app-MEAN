@@ -52,6 +52,7 @@ module.exports.updateTask = (userTask, callback) => {
       task.description = userTask.description;
       task.status = userTask.status;
       task.labels = userTask.labels;
+      task.dueDate = userTask.dueDate;
       task.save(callback);
     }
   })

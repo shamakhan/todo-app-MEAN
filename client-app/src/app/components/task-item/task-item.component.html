@@ -2,7 +2,10 @@
   <div class="d-flex flex-row justify-content-between">
     <span class="title">
       <mat-icon>double_arrow</mat-icon>
-      {{task.title}}
+      <span *ngIf="!task.description">{{task.title}}</span>
+      <a class="has-description" *ngIf="task.description" data-toggle="collapse" [href]="'#description'+task._id" role="button" aria-expanded="false" [attr.aria-controls]="'description'+task._id">
+        {{task.title}}
+      </a>
     </span>
     
     <div class="action-buttons">
@@ -18,9 +21,7 @@
     </div>
   </div>
   <div class="d-flex flex-row justify-content-between">
-    <a  class="list-collapse-btn" *ngIf="task.description" data-toggle="collapse" [href]="'#description'+task._id" role="button" aria-expanded="false" [attr.aria-controls]="'description'+task._id">
-      Description
-    </a>
+    <span *ngIf="showDueDate && dueDateLabel.label" [className]="'due-date-label badge ' + dueDateLabel.type">{{ dueDateLabel.label }}</span>
     <div class="labels-list">
       <span *ngFor="let label of objectEntries(task.labels)" [className]="'label badge-' + label[1]" >
         {{label[0]}}
@@ -28,7 +29,7 @@
     </div>
   </div>
   <div class="collapse" [id]="'description'+task._id">
-    <div class="card card-body">
+    <div class="card card-body task-description">
       {{task.description}}
     </div>
   </div>
