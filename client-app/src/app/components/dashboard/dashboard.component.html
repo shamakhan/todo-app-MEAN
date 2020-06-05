@@ -1,26 +1,29 @@
 <app-add-task (taskAdded)="taskAdded($event)"></app-add-task>
+<app-task-filters [labels]="labels" (filtersChanged)="filtersChanged($event)"></app-task-filters>
 <div class="task-list-wrapper">
   <app-task-group
     groupName="New"
-    [tasks]="tasks['new']"
+    [tasks]="filteredTasks.get('new')"
     (editTask)="editTask($event)"
     (deleteTask)="deleteTask($event)"
     (changeTaskStatus)="changeTaskStatus($event)"
   ></app-task-group>
   <app-task-group
     groupName="In_progress"
-    [tasks]="tasks['in_progress']"
+    [tasks]="filteredTasks.get('in_progress')"
     (editTask)="editTask($event)"
     (deleteTask)="deleteTask($event)"
     (changeTaskStatus)="changeTaskStatus($event)"
   ></app-task-group>
   <app-task-group
     groupName="Completed"
-    [tasks]="tasks['completed']"
+    [tasks]="filteredTasks.get('completed')"
     (editTask)="editTask($event)"
     (deleteTask)="deleteTask($event)"
     (changeTaskStatus)="changeTaskStatus($event)"
     [showDueDate]="false"
+    [showArchive]="true"
+    (archiveTask)="archiveTask($event)"
   ></app-task-group>
 </div>
 <app-task-settings *ngIf="taskToEdit" [settings]="taskToEdit" (saved)="taskEdited($event)" (close)="closeEditDialog()"></app-task-settings>

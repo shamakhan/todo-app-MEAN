@@ -9,9 +9,25 @@
     border-radius: 4px 4px 0 0;
     background: #aaa;
 
-    .mat-icon {
+    .top-right {
       float: right;
+      display: flex;
+      align-items: center;
+
+      input[type="checkbox"] {
+        cursor: pointer;
+        margin-right: 5px;
+      }
+
+      .mat-icon {
+        &.archive-button {
+          margin-right: -8px;
+          cursor: pointer;
+        }
+      }
     }
+
+
 
     &.new {
       background: #ded7b1;

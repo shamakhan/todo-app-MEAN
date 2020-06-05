@@ -39,11 +39,16 @@
       padding: 2px 6px;
       width: 100px;
       font-size: 12px;
-      vertical-align: text-bottom;
+      vertical-align: top;
     }
     .btn {
       padding: 0;
       margin-left: 10px;
+    }
+
+    .mat-icon {
+      cursor: pointer;
+      margin-left: 5px;
     }
   }
 

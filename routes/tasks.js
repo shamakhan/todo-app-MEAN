@@ -74,4 +74,15 @@ router.post('/change-status', (req, res, next) => {
   })
 });
 
+router.get('/archive/:taskId', (req, res, next) => {
+  Task.archiveTask(req.params.taskId, (err, archived) => {
+    if (err) throw err;
+    if (archived) {
+      res.json({ success: true, message: "Task(s) archived" });
+    } else {
+      res.json({ success: false, message: "Could not archive task(s)" });
+    }
+  })
+})
+
 module.exports = router;

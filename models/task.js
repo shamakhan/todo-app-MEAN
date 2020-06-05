@@ -73,3 +73,19 @@ module.exports.updateStatus = (taskId, newStatus, callback) => {
     }
   })
 }
+
+module.exports.archiveTask = (taskId, callback) => {
+  if (taskId === 'all') {
+    Task.updateMany({ status: "completed" }, { $set: { archived: true }}, callback);
+  } else {
+    Task.findById(taskId, (err, task) => {
+      if (err) callback(err, null);
+      if (task) {
+        task.archived = true;
+        task.save(callback);
+      } else {
+        callback(null, false);
+      }
+    });
+  }
+}

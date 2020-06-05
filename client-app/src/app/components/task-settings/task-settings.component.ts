@@ -18,7 +18,7 @@ export class TaskSettingsComponent implements OnInit {
   labels: any = {};
   description: String;
   status: String = "new";
-  availableLabels: any = {"Personal": "primary", "Work": "warning", "Shopping": "success"};
+  availableLabels: any = {...staticLabels};
   objectEntries = Object.entries
   labelAddFormOpen: Boolean = false;
   customLabel: string;

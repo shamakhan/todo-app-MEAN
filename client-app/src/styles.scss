@@ -46,3 +46,13 @@ button.confirm-btn {
     width: 100%;
   }
 }
+
+
+.dp-input-container {
+  .dp-picker-input {
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.2);
+    max-width: 120px;
+    padding: 16px;
+  }
+}

@@ -25,6 +25,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskSettingsComponent } from './components/task-settings/task-settings.component';
 import { TaskItemComponent } from './components/task-item/task-item.component';
+import { TaskFiltersComponent } from './components/task-filters/task-filters.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TaskItemComponent } from './components/task-item/task-item.component';
     TaskGroupComponent,
     AddTaskComponent,
     TaskSettingsComponent,
-    TaskItemComponent
+    TaskItemComponent,
+    TaskFiltersComponent
   ],
   imports: [
     BrowserModule,

@@ -30,4 +30,8 @@ export class TasksService {
   changeStatus(payload) {
     return this.http.post(this.getRootApi('/change-status'), payload);
   }
+
+  archiveTasks(taskId = 'all') {
+    return this.http.get(this.getRootApi('/archive/'+taskId));
+  }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { List, fromJS } from 'immutable';
 
 @Component({
   selector: 'app-task-group',
@@ -9,23 +10,36 @@ export class TaskGroupComponent implements OnInit {
   @Input() tasks;
   @Input() groupName;
   @Input() showDueDate: boolean = true;
+  @Input() showArchive: boolean = false;
   @Output() editTask: EventEmitter<any> = new EventEmitter();
   @Output() deleteTask: EventEmitter<any> = new EventEmitter();
   @Output() changeTaskStatus: EventEmitter<any> = new EventEmitter();
-  collapsed: boolean = false;
+  @Output() archiveTask: EventEmitter<any> = new EventEmitter();
   listId: string;
+  showArchivedTasks: boolean = false;
+  filteredTasks = List();
   constructor() { }
 
   ngOnInit(): void {
     this.listId = `taskList${this.groupName}`;
+    this.filterTasks();
   }
 
-  toggleListCollapse() {
-    this.collapsed = !this.collapsed;
+  ngOnChanges(changes: SimpleChanges) {
+    for (let propName in changes) {
+      if (propName === 'tasks' && changes[propName].currentValue && (!changes[propName].currentValue.equals(changes[propName].previousValue))) {
+        this.filterTasks();
+      }
+    }
   }
 
-  onTaskEdit(task) {
-    this.editTask.emit(task);
+  filterTasks() {
+    if (!this.tasks) return;
+    if (!this.showArchive) {
+      this.filteredTasks = fromJS(this.tasks);
+      return;
+    }
+    this.filteredTasks = this.tasks.filter((task) => this.showArchivedTasks || !task.get('archived'));
   }
 
   onTaskDelete(taskId) {
@@ -34,9 +48,5 @@ export class TaskGroupComponent implements OnInit {
       id: taskId,
     }
     this.deleteTask.emit(payload);
-  }
-
-  onTaskStatusChange(payload) {
-    this.changeTaskStatus.emit(payload);
   }
 }

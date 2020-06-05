@@ -10,9 +10,12 @@ import * as moment from 'moment';
 export class TaskItemComponent implements OnInit {
   @Input() task;
   @Input() showDueDate: boolean = true;
+  @Input() showArchive: boolean = false;
   @Output() editTask: EventEmitter<any> = new EventEmitter();
   @Output() deleteTask: EventEmitter<any> = new EventEmitter();
   @Output() changeTaskStatus: EventEmitter<any> = new EventEmitter();
+  @Output() archiveTask: EventEmitter<any> = new EventEmitter();
+
   objectEntries = Object.entries;
   statuses = statuses
   status: String;
@@ -26,14 +29,6 @@ export class TaskItemComponent implements OnInit {
     if (this.showDueDate) {
       this.dueDateLabel = this.getDueDateLabel();
     }
-  }
-
-  editTaskClicked() {
-    this.editTask.emit(this.task);
-  }
-
-  onDeleteClick() {
-    this.deleteTask.emit(this.task._id);
   }
 
   onStatusChange() {

@@ -74,4 +74,10 @@
     .confirm-btn {
       padding: 7px 20px;
     }
+
+    .task-status {
+      &.custom-select {
+        max-width: 150px;
+      }
+    }
   }
