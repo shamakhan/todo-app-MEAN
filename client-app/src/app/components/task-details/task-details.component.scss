@@ -8,76 +8,62 @@
   bottom: 0;
   z-index: 1;
 
-  .add-labels {
-    .label-show {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-      .label {
-        margin-top: 5px;
-      }
-    }
-    .label {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: bold;
-      margin-right: 5px;
-      padding: 2px 4px;
-      border-radius: 4px;
+  .modal-dialog {
+    top: 80px;
+  }
 
-      .remove {
-        cursor: pointer;
-        background: #555;
-        color: #fff;
-        padding: 0 4px;
-        border-radius: 50%;
-      }
-    }
-      .add-button {
-        font-size: 30px;
-        line-height: 1;
-        cursor: pointer;
-      }
+  .modal-body {
+    padding-top: 10px;
+    // min-height: 250px;
+  }
 
-      .label-form {
-        .label {
-          cursor: pointer;
-        }
-      }
-      .custom-label-form {
-        margin-top: 10px;
-        
-        input {
-          height: 30px;
-          padding: 0.25rem;
-          font-size: 0.8rem;
-        }
+  .task-title {
+    // display: flex;
+    font-size: 20px;
+    margin-bottom: 10px;
+    // margin-top: 20px;
+  }
 
-        select {
-          height: 30px;
-          margin-left: 5px;
-          padding: .2rem;
-          font-size: 0.8rem;
-        }
+  .description {
+    color: #555;
+    margin-bottom: 10px;
+  }
 
-        .confirm-btn {
-          padding: 0;
-        }
+  .status {
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
 
-        .done {
-          background-color: #6c757d;
-          border-color: #6c757d;
-        }
-      }
-    }
+  .due-date-label {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    margin-right: 4px;
+    background: #fff2cd;
+    padding: 4px 8px;
+    font-size: 12px;
 
-    .confirm-btn {
-      padding: 7px 20px;
-    }
-
-    .task-status {
-      &.custom-select {
-        max-width: 150px;
-      }
+    &.danger {
+      background: rgba(128, 0, 0, 0.2);
+      color: rgb(128, 0,0);
     }
   }
+
+  .label-show {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px 0;
+    .label {
+      margin-top: 5px;
+    }
+  }
+  .label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+}

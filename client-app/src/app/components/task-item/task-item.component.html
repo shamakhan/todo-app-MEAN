@@ -39,4 +39,4 @@
     </div>
   </div>
 </div>
-<app-task-details *ngIf="showDetails" [task]="task" (close)="toggleShowDetails()"></app-task-details>
+<app-task-details *ngIf="showDetails" [task]="task" [dueDate]="dueDateLabel" (close)="toggleShowDetails()"></app-task-details>

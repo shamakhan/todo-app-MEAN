@@ -9,38 +9,23 @@
       </div>
       <div class="modal-body">
         <form>
-          <div class="row flex-row">
-            <label class="col-sm-3" for="title">Title:</label>
-            <span class="col-sm-8">{{ task.title }}</span>
+          <div class="status">Status:&nbsp;{{ task.status }}</div>
+          <div class="task-title">
+            {{ task.title }}
           </div>
-          <div class="row flex-row">
-            <label class="col-sm-3" for="description">Description:</label>
-            <span class="col-sm-8">{{ task.description }}</span>
+          <div class="description">
+              {{ task.description || 'No description.' }}
           </div>
-          <div class="row flex-row">
-            <label class="col-sm-3" for="labels">Labels:</label>
-            <div class="col-sm-8">
-              <div class="label-show row">
-                <span *ngFor="let label of objectEntries(task.labels || {})"  [className]="'label badge-' + label[1]" >
-                  {{label[0]}}
-                </span>
-              </div>
-            </div>
+          <div *ngIf="dueDate.label" [class]="'due-date-label '+'badge '+dueDate.type">
+            {{ dueDate.label }}
           </div>
-          <div class="row flex-row">
-            <label class="col-sm-3" for="status">Status:</label>
-            <span class="col-sm-8 capitalize">{{ task.status }}</span>
-          </div>
-          <div class="row flex-row">
-            <label class="col-sm-3" for="dueDate">Due Date:</label>
-            <span class="col-sm-8">{{ task.dueDate }}</span>
+          <div class="label-show row">
+            <span *ngFor="let label of objectEntries(task.labels || {})"  [className]="'label badge-' + label[1]" >
+              {{label[0]}}
+            </span>
           </div>
         </form>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeSettings()">Close</button>
-        <button type="button" class="confirm-btn" [disabled]="!title" (click)="saveTask()">Save</button>
-      </div> -->
     </div>
   </div>
 </div>
