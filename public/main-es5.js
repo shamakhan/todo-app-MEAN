@@ -1650,7 +1650,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-google-login"]],
       decls: 7,
       vars: 0,
-      consts: [[1, "google-oath"], [1, "separator"], [1, "horizontal-line"], ["href", "http://localhost:3000/oauth/google"], ["src", "../../../assets/google-auth-image.png", "alt", "google auth image"]],
+      consts: [[1, "google-oath"], [1, "separator"], [1, "horizontal-line"], ["href", "/oauth/google"], ["src", "../../../assets/google-auth-image.png", "alt", "google auth image"]],
       template: function GoogleLoginComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);

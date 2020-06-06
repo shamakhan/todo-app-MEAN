@@ -973,7 +973,7 @@ class GoogleLoginComponent {
     }
 }
 GoogleLoginComponent.ɵfac = function GoogleLoginComponent_Factory(t) { return new (t || GoogleLoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"])); };
-GoogleLoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: GoogleLoginComponent, selectors: [["app-google-login"]], decls: 7, vars: 0, consts: [[1, "google-oath"], [1, "separator"], [1, "horizontal-line"], ["href", "http://localhost:3000/oauth/google"], ["src", "../../../assets/google-auth-image.png", "alt", "google auth image"]], template: function GoogleLoginComponent_Template(rf, ctx) { if (rf & 1) {
+GoogleLoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: GoogleLoginComponent, selectors: [["app-google-login"]], decls: 7, vars: 0, consts: [[1, "google-oath"], [1, "separator"], [1, "horizontal-line"], ["href", "/oauth/google"], ["src", "../../../assets/google-auth-image.png", "alt", "google auth image"]], template: function GoogleLoginComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "span", 2);
