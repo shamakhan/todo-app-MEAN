@@ -1209,7 +1209,6 @@ class LoginComponent {
             this.flashMessage.show("Please fill all fields", { cssClass: "alert alert-danger popup-alert" });
             return;
         }
-        console.log(user);
         this.authService.authenticateUser(user).subscribe((data) => {
             if (data.success) {
                 this.authService.storeUserData(data);

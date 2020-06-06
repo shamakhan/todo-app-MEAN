@@ -2162,7 +2162,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return;
           }
 
-          console.log(user);
           this.authService.authenticateUser(user).subscribe(function (data) {
             if (data.success) {
               _this9.authService.storeUserData(data);

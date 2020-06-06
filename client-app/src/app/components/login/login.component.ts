@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
       this.flashMessage.show("Please fill all fields", { cssClass: "alert alert-danger popup-alert" });
       return;
     }
-    console.log(user);
     this.authService.authenticateUser(user).subscribe((data: any) => {
       if (data.success) {
         this.authService.storeUserData(data);
