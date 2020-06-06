@@ -1,6 +1,7 @@
 module.exports = {
-  database: "mongodb://localhost:27017/stackhackTodo",
+  database: process.env.DB_URL,
   token: {
-    secret: "hjh34h324lkekl23djd8ejds"
-  }
+    secret: process.env.JWT_STRATEGY_SECRET
+  },
+
 };

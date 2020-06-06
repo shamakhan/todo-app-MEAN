@@ -3,6 +3,8 @@ const router = express.Router();
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
+const util = require('../util');
+
 const config = require("../config/app");
 const User = require("../models/user");
 
@@ -45,27 +47,30 @@ router.post("/login", (req, res, next) => {
         if (!isMatch) {
           res.json({ status: "failure", message: "Invalid credentials" });
         } else {
-          const token = jwt.sign(user.toJSON(), config.token.secret, {
-            expiresIn: 86400, // 2 days 
-          });
-          res.json({
-            status: "success",
-            token: "JWT " + token,
-            expiresIn: 86400,
-            user: {
-              id: user._id,
-              name: user.name,
-              username: user.username,
-              email: user.email
-            }
-          });
+          res.json(util.getJwtToken(user));
         }
       })
     }
   })
 });
 
-router.get("/dashboard", passport.authenticate("jwt", { session: false }), (req, res, next) => {
+router.post('/login-with-google', (req, res, next) => {
+  User.findOne({ 'google.id': req.body.id }, (err, user) => {
+    if (err) throw err;
+    if (!user) {
+      res.json({ success: false, message: "User not found" });
+    } else {
+      res.json(util.getJwtToken(user));
+    }
+  })
+})
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.send({ success: true });
+});
+
+router.get("/dashboard", passport.authenticate(["jwt", "passport-google-oauth"], { session: false }), (req, res, next) => {
   res.send("DASHBOARD");
 });
 

@@ -28,6 +28,7 @@ import { TaskSettingsComponent } from './components/task-settings/task-settings.
 import { TaskItemComponent } from './components/task-item/task-item.component';
 import { TaskFiltersComponent } from './components/task-filters/task-filters.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { GoogleLoginComponent } from './components/google-login/google-login.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TaskDetailsComponent } from './components/task-details/task-details.com
     TaskSettingsComponent,
     TaskItemComponent,
     TaskFiltersComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    GoogleLoginComponent,
   ],
   imports: [
     BrowserModule,

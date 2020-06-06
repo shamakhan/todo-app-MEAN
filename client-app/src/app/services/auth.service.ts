@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
@@ -23,9 +22,11 @@ export class AuthService {
   }
 
   authenticateUser(user) {
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
     return this.http.post(this.getUserApi('/login'), user);
+  }
+
+  loginWithGoogleId(id) {
+    return this.http.post(this.getUserApi('/login-with-google'), { id: id });
   }
 
   storeUserData(data) {
@@ -45,6 +46,7 @@ export class AuthService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+    return this.http.get(this.getUserApi('/logout'));
   }
 
   isLoggedIn() {
@@ -59,5 +61,9 @@ export class AuthService {
     const expiration = localStorage.getItem("expires_at");
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
+  }
+
+  callGoogleOauth() {
+    return this.http.get('/oauth/google');
   }
 }

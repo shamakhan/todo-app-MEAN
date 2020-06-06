@@ -20,7 +20,7 @@ export class ValidateService {
   }
 
   validateLogin(user) {
-    if (user.username == undefined || user.password == undefined) {
+    if (!user.username || !user.password) {
       return false;
     }
     return true;

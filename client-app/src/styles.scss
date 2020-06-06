@@ -62,3 +62,12 @@ button.confirm-btn {
 input.form-control {
   background: #f4f5f6;
 }
+
+.popup-alert.alert.flash-message {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  margin: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}

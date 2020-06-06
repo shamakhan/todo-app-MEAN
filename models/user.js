@@ -5,20 +5,21 @@ const Task = require('./task');
 
 const UserSchema = mongoose.Schema({
   name: {
-    type: "String"
+    type: String
   },
   username: {
-    type: "String",
-    required: true,
+    type: String,
     index: true
   },
   email: {
-    type: "String",
-    required: true,
+    type: String,
   },
   password: {
-    type: "String",
-    required: true,
+    type: String,
+  },
+  google: {
+    id: String,
+    token: String,
   },
   tasks : [
     {

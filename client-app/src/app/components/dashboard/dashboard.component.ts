@@ -159,17 +159,18 @@ export class DashboardComponent implements OnInit {
     } else {
       const oldStatus = event.previousContainer.data;
       const newStatus = event.container.data;
-      const movedTask = this.filteredTasks.getIn([oldStatus, event.previousIndex]).set('status', newStatus);
+      let movedTask = this.filteredTasks.getIn([oldStatus, event.previousIndex]).set('status', newStatus);
       this.filteredTasks = this.filteredTasks.update(oldStatus, (list) => list.filter((t) => t.get('_id') !== movedTask.get('_id')));
       this.tasks = this.tasks.update(oldStatus, (list) => list.filter((t) => t.get('_id') !== movedTask.get('_id')));
       let orders = [];
-      this.filteredTasks = this.filteredTasks.update(newStatus, (list) => {
+      this.filteredTasks = this.filteredTasks.update(newStatus, List(), (list) => {
         const newList = list.insert(event.currentIndex, movedTask);
         orders = newList.map((item) => item.get('order')).sort().toJS();
-        return newList.map((list, index) => {
-          return list.set('order', orders[index])
+        return newList.map((item, index) => {
+          return item.set('order', orders[index])
         });
       });
+      this.tasks = this.tasks.update(newStatus, List(), (list) => list.push(movedTask));
       const newOrders = this.getNewOrders(newStatus);
       this.updateTaskOrders(newStatus, newOrders);
       this.taskService.updateOrders(newOrders).subscribe((data: any) => {
@@ -187,7 +188,7 @@ export class DashboardComponent implements OnInit {
   }
 
   updateTaskOrders(listName, orders) {
-    this.tasks = this.tasks.update(listName, (list) => list.map((t) => {
+    this.tasks = this.tasks.update(listName, List(), (list) => list.map((t) => {
       if (orders[t.get('_id')]) return t.set('order', orders[t.get('_id')]);
       return t;
     }).sortBy((t) => t.get('order')));

@@ -26,7 +26,6 @@ export class RegisterComponent implements OnInit {
   }
   
   onRegisterSubmit() {
-    // e.preventDefault();
     const user = {
       name: this.name,
       username: this.username,
@@ -34,16 +33,15 @@ export class RegisterComponent implements OnInit {
       password: this.password
     };
     if (!this.validateService.validateRegister(user)) {
-      this.flashMessage.show("Please fill all required fields", { cssClass: "alert alert-danger" });
+      this.flashMessage.show("Please fill all required fields", { cssClass: "alert alert-danger popup-alert" });
       return;
     }
     if (!this.validateService.validateEmail(this.email)) {
-      this.flashMessage.show("Please enter a valid email", { cssClass: "alert alert-danger" });
+      this.flashMessage.show("Please enter a valid email", { cssClass: "alert alert-danger popup-alert" });
       return;
     }
     this.authService.registerUser(user).subscribe((data: any) => {
-      // console.log(data);
-      this.flashMessage.show(data.message, { cssClass: `alert ${data.status === 'success' ? 'alert-success' : 'alert-danger'}`});
+      this.flashMessage.show(data.message, { cssClass: `alert popup-alert ${data.status === 'success' ? 'alert-success' : 'alert-danger'}`});
       if (data.status === "success") {
         // this.flashMessage.show(data.message);
         this.router.navigate(['/login']);
