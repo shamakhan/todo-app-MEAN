@@ -19,16 +19,16 @@ export class DashboardComponent implements OnInit {
   filters: any = {};
   constructor(private taskService: TasksService) { }
   immutableList = List;
+  addingTaskInGroup: String = null;
 
   ngOnInit(): void {
     this.taskService.getTasks().subscribe((data: any) => {
       let labels = [];
       this.tasks = fromJS(data.reduce((acc, task) => {
-        let status = task.status.toLowerCase();
-        if (!acc[status]) {
-          acc[status] = [];
+        if (!acc[task.status]) {
+          acc[task.status] = [];
         }
-        acc[status].push(task);
+        acc[task.status].push(task);
         if (!task.labels || task.labels instanceof Array) {
           task.labels = {};
         }
@@ -40,11 +40,15 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  addTask(listName) {
+    this.addingTaskInGroup = listName;
+  }
+
   taskAdded(task) {
-    const status = task.status.toLowerCase();
-    this.tasks = this.tasks.update(status, List(), (list) => list.push(fromJS(task)));
+    this.addingTaskInGroup = null;
+    this.tasks = this.tasks.update(task.status, List(), (list) => list.push(fromJS(task)));
     if (this.applyFilterOnTask(task)) {
-      this.filteredTasks = this.filteredTasks.update(status, List(), (list) => list.push(fromJS(task)));
+      this.filteredTasks = this.filteredTasks.update(task.status, List(), (list) => list.push(fromJS(task)));
     }
     this.labels = Array.from(new Set(this.labels.concat(Object.keys(task.labels || {}))));
   }
@@ -54,13 +58,12 @@ export class DashboardComponent implements OnInit {
   }
 
   taskEdited(task) {
-    const status = task.status.toLowerCase();
-    if (this.taskToEdit.status !== task.status) {
-      this.tasks = this.tasks.update(status, List(), (list) => list.push(fromJS(task).sortBy((t) => t.get('order'))));
-      const oldStatus = this.taskToEdit.status.toLowerCase();
+    const oldStatus = task.oldStatus || this.taskToEdit.status;
+    if (oldStatus !== task.status) {
+      this.tasks = this.tasks.update(task.status, List(), (list) => list.push(fromJS(task).sortBy((t) => t.get('order'))));
       this.tasks = this.tasks.update(oldStatus, List(), (list) => list.filter(t => t.get('_id') !== task.get('_id')));
     } else {
-      this.tasks = this.tasks.update(status, List(), (list) => list.map((t) => {
+      this.tasks = this.tasks.update(task.status, List(), (list) => list.map((t) => {
         if (t.get('_id') === task._id) {
           return fromJS(task);
         }
@@ -72,15 +75,16 @@ export class DashboardComponent implements OnInit {
     this.labels = Array.from(new Set(this.labels.concat(Object.keys(task.labels || {}))));
   }
 
-  closeEditDialog() {
+  closeDialog() {
     this.taskToEdit = null;
+    this.addingTaskInGroup = null;
   }
 
   deleteTask(task) {
     this.taskService.deleteTask(task.id).subscribe((data: any) => {
       if (data.success) {
-        this.tasks = this.tasks.update(task.listName.toLowerCase(), (list) => list.filter(t => t.get('_id') !== task.id));
-        this.filteredTasks = this.filteredTasks.update(task.listName.toLowerCase(), (list) => list.filter(t => t.get('_id') !== task.id));
+        this.tasks = this.tasks.update(task.listName, (list) => list.filter(t => t.get('_id') !== task.id));
+        this.filteredTasks = this.filteredTasks.update(task.listName, (list) => list.filter(t => t.get('_id') !== task.id));
       }
     })
   }
@@ -135,7 +139,6 @@ export class DashboardComponent implements OnInit {
 
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
     if (event.previousContainer.data === event.container.data) {
       if (event.previousIndex === event.currentIndex) return;
       const listName = event.container.data;

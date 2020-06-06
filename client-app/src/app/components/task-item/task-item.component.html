@@ -12,6 +12,7 @@
       <mat-icon (click)="onEditTaskClick($event)">edit</mat-icon>
       <mat-icon (click)="onDeleteTaskClick($event)">delete</mat-icon>
       <mat-icon *ngIf="showArchive && !task.archived" (click)="onArchiveTaskClick($event)">archive</mat-icon>
+      <!-- <div class="task-actions-mo" -->
     </div>
   </div>
   <div class="d-flex flex-row justify-content-between align-items-center">
@@ -28,4 +29,4 @@
     </div>
   </div>
 </div>
-<app-task-details *ngIf="showDetails" [task]="task" [dueDate]="dueDateLabel" (close)="toggleShowDetails()"></app-task-details>
+<app-task-details *ngIf="showDetails" [task]="task" [dueDate]="dueDateLabel" (close)="toggleShowDetails()" (edited)="showDetails = false;edited.emit($event)"></app-task-details>

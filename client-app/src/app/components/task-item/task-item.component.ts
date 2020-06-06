@@ -15,6 +15,7 @@ export class TaskItemComponent implements OnInit {
   @Output() deleteTask: EventEmitter<any> = new EventEmitter();
   @Output() changeTaskStatus: EventEmitter<any> = new EventEmitter();
   @Output() archiveTask: EventEmitter<any> = new EventEmitter();
+  @Output() edited: EventEmitter<any> = new EventEmitter();
 
   objectEntries = Object.entries;
   statuses = statuses
@@ -26,7 +27,7 @@ export class TaskItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.task.labels = this.task.labels || {}
-    this.status = this.task.status.toLowerCase();
+    this.status = this.task.status;
     if (this.showDueDate) {
       this.dueDateLabel = this.getDueDateLabel();
     }

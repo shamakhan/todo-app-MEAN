@@ -9,6 +9,7 @@ import { List, fromJS } from 'immutable';
 export class TaskGroupComponent implements OnInit {
   @Input() tasks;
   @Input() groupName;
+  @Input() groupLabel;
   @Input() showDueDate: boolean = true;
   @Input() showArchive: boolean = false;
   @Output() editTask: EventEmitter<any> = new EventEmitter();
@@ -16,6 +17,8 @@ export class TaskGroupComponent implements OnInit {
   @Output() changeTaskStatus: EventEmitter<any> = new EventEmitter();
   @Output() archiveTask: EventEmitter<any> = new EventEmitter();
   @Output() drop: EventEmitter<any> = new EventEmitter();
+  @Output() addTask: EventEmitter<any> = new EventEmitter();
+  @Output() edited: EventEmitter<any> = new EventEmitter();
   listId: string;
   showArchivedTasks: boolean = false;
   filteredTasks = List();
