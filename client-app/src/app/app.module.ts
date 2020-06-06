@@ -26,6 +26,7 @@ import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskSettingsComponent } from './components/task-settings/task-settings.component';
 import { TaskItemComponent } from './components/task-item/task-item.component';
 import { TaskFiltersComponent } from './components/task-filters/task-filters.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TaskFiltersComponent } from './components/task-filters/task-filters.com
     AddTaskComponent,
     TaskSettingsComponent,
     TaskItemComponent,
-    TaskFiltersComponent
+    TaskFiltersComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,

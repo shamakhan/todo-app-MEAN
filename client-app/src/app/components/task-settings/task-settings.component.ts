@@ -53,10 +53,6 @@ export class TaskSettingsComponent implements OnInit {
       return acc;
     },{}) : Object.assign({}, staticLabels);
   }
-  closeSettings() {
-    this.close.emit();
-  }
-
   saveTask() {
     const task = {
       id: this.settings._id,

@@ -15,7 +15,7 @@
       <app-task-item
        *ngFor="let task of filteredTasks"
         [task]="task.toJS()"
-        (editTask)="editTask.emit(task)"
+        (editTask)="editTask.emit($event)"
         (deleteTask)="onTaskDelete($event)"
         (changeTaskStatus)="changeTaskStatus.emit($event)"
         [showDueDate]="showDueDate"

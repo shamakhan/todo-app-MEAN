@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Advance Task Settings</h5>
-        <button type="button" class="close" (click)="closeSettings()">
+        <button type="button" class="close" (click)="close.emit()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -55,13 +55,13 @@
             </select>
           </div>
           <div class="form-group row flex-row">
-            <label class="col-sm-3" for="status">Due Date:</label>
+            <label class="col-sm-3" for="datepickerDate">Due Date:</label>
             <dp-date-picker (onChange)="onDueDateChange($event)" [(ngModel)]="datepickerDate" name="datepickerDate" theme="dp-material" [config]="datePickerConfig"></dp-date-picker>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeSettings()">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="close.emit()">Close</button>
         <button type="button" class="confirm-btn" [disabled]="!title" (click)="saveTask()">Save</button>
       </div>
     </div>

@@ -20,6 +20,7 @@ export class TaskItemComponent implements OnInit {
   statuses = statuses
   status: String;
   dueDateLabel: any;
+  showDetails: Boolean = false;
 
   constructor() { }
 
@@ -52,5 +53,28 @@ export class TaskItemComponent implements OnInit {
       return { label: "Due: Tomorrow" };
     }
     return { label: 'Due on: ' + this.task.dueDate };
+  }
+
+  toggleShowDetails() {
+    this.showDetails = !this.showDetails;
+  }
+
+  onEditTaskClick(e) {
+    e.stopPropagation();
+    this.editTask.emit(this.task);
+  }
+
+  onDeleteTaskClick(e) {
+    e.stopPropagation();
+    this.deleteTask.emit(this.task._id);
+  }
+
+  onArchiveTaskClick(e) {
+    e.stopPropagation();
+    this.archiveTask.emit(this.task._id);
+  }
+
+  onChangeStatusClick(e) {
+    e.stopPropagation();
   }
 }
