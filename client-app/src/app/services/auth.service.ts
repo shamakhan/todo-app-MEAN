@@ -9,7 +9,7 @@ import * as moment from 'moment';
 export class AuthService {
   authToken: any;
   user: any;
-  apiEndpoint: string = 'http://localhost:3000';
+  apiEndpoint: string = ''; // 'http://localhost:3000';
   userApiRoot: string = '/api/users';
   constructor(private http: HttpClient) { }
 

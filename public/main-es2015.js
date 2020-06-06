@@ -2738,7 +2738,7 @@ __webpack_require__.r(__webpack_exports__);
 class AuthService {
     constructor(http) {
         this.http = http;
-        this.apiEndpoint = 'http://localhost:3000';
+        this.apiEndpoint = ''; // 'http://localhost:3000';
         this.userApiRoot = '/api/users';
     }
     getUserApi(route) {
@@ -2816,7 +2816,7 @@ __webpack_require__.r(__webpack_exports__);
 class TasksService {
     constructor(http) {
         this.http = http;
-        this.apiEndpoint = 'http://localhost:3000';
+        this.apiEndpoint = ''; //'http://localhost:3000';
         this.userApiRoot = '/api/tasks';
     }
     getTasks() {

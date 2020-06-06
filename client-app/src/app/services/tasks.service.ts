@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TasksService {
-  apiEndpoint: string = 'http://localhost:3000';
+  apiEndpoint: string = ''; //'http://localhost:3000';
   userApiRoot: string = '/api/tasks';
   constructor(private http: HttpClient) { }
 

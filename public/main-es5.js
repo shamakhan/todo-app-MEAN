@@ -5382,7 +5382,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, AuthService);
 
         this.http = http;
-        this.apiEndpoint = 'http://localhost:3000';
+        this.apiEndpoint = ''; // 'http://localhost:3000';
+
         this.userApiRoot = '/api/users';
       }
 
@@ -5523,7 +5524,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, TasksService);
 
         this.http = http;
-        this.apiEndpoint = 'http://localhost:3000';
+        this.apiEndpoint = ''; //'http://localhost:3000';
+
         this.userApiRoot = '/api/tasks';
       }
 
