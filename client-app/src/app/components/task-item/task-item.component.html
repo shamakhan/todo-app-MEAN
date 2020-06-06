@@ -1,18 +1,8 @@
-<div class="list-item" (click)="toggleShowDetails()">
+<div class="list-item" (click)="toggleShowDetails()" cdkDrag>
   <div class="top-row">
     <span class="title">
-      <mat-icon>double_arrow</mat-icon>
+      <mat-icon>drag_indicator</mat-icon>
       <span>{{task.title}}</span>
-      <!-- <span *ngIf="!task.description">{{task.title}}</span>
-      <a class="has-description"
-       *ngIf="task.description"
-       data-toggle="collapse"
-       [href]="'#description'+task._id" 
-       role="button" aria-expanded="false" 
-       [attr.aria-controls]="'description'+task._id"
-      >
-        {{task.title}}
-      </a> -->
     </span>
     
     <div class="action-buttons">
@@ -22,7 +12,6 @@
       <mat-icon (click)="onEditTaskClick($event)">edit</mat-icon>
       <mat-icon (click)="onDeleteTaskClick($event)">delete</mat-icon>
       <mat-icon *ngIf="showArchive && !task.archived" (click)="onArchiveTaskClick($event)">archive</mat-icon>
-      <!-- <div class="task-actions-mo" -->
     </div>
   </div>
   <div class="d-flex flex-row justify-content-between align-items-center">

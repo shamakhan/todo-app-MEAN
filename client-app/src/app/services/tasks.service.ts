@@ -34,4 +34,8 @@ export class TasksService {
   archiveTasks(taskId = 'all') {
     return this.http.get(this.getRootApi('/archive/'+taskId));
   }
+
+  updateOrders(newOrders) {
+    return this.http.post(this.getRootApi('/update/order'), {taskOrders: newOrders});
+  }
 }

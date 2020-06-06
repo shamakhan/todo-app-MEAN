@@ -15,6 +15,7 @@ export class TaskGroupComponent implements OnInit {
   @Output() deleteTask: EventEmitter<any> = new EventEmitter();
   @Output() changeTaskStatus: EventEmitter<any> = new EventEmitter();
   @Output() archiveTask: EventEmitter<any> = new EventEmitter();
+  @Output() drop: EventEmitter<any> = new EventEmitter();
   listId: string;
   showArchivedTasks: boolean = false;
   filteredTasks = List();
@@ -49,4 +50,5 @@ export class TaskGroupComponent implements OnInit {
     }
     this.deleteTask.emit(payload);
   }
+
 }

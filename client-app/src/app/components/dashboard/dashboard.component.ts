@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { TasksService } from '../../services/tasks.service';
 import { filter } from 'rxjs/operators';
 import { Map, List, fromJS } from 'immutable';
@@ -33,10 +34,9 @@ export class DashboardComponent implements OnInit {
         }
         labels = labels.concat(Object.keys(task.labels));
         return acc;
-      }, {}));
+      }, {})).map((list) => list.sortBy((t) => t.get('order')));
       this.labels = Array.from(new Set(labels));
       this.filteredTasks = fromJS(this.tasks);
-      // debugger;
     });
   }
 
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
   taskEdited(task) {
     const status = task.status.toLowerCase();
     if (this.taskToEdit.status !== task.status) {
-      this.tasks = this.tasks.update(status, List(), (list) => list.push(fromJS(task)));
+      this.tasks = this.tasks.update(status, List(), (list) => list.push(fromJS(task).sortBy((t) => t.get('order'))));
       const oldStatus = this.taskToEdit.status.toLowerCase();
       this.tasks = this.tasks.update(oldStatus, List(), (list) => list.filter(t => t.get('_id') !== task.get('_id')));
     } else {
@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
     this.taskService.changeStatus(payload).subscribe((data: any) => {
       if (data.success) {
         this.tasks = this.tasks.update(payload.oldStatus, (list) => list.filter(t => t.get('_id') !== payload.id));
-        this.tasks = this.tasks.update(payload.newStatus, List(), (list) => list.push(fromJS(data.task)));
+        this.tasks = this.tasks.update(payload.newStatus, List(), (list) => list.push(fromJS(data.task)).sortBy((t) => t.get('order')));
         this.applyFilters();
       }
     })
@@ -132,4 +132,62 @@ export class DashboardComponent implements OnInit {
       }));
     })
   }
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    console.log(event);
+    if (event.previousContainer.data === event.container.data) {
+      if (event.previousIndex === event.currentIndex) return;
+      const listName = event.container.data;
+      let orders = [];
+      this.filteredTasks = this.filteredTasks.update(listName, (list) => {
+        const task = list.get(event.previousIndex);
+        const newList = list.splice(event.previousIndex, 1).insert(event.currentIndex, task);
+        orders = newList.map((item) => item.get('order')).sort().toJS();
+        return newList.map((list, index) => {
+          return list.set('order', orders[index])
+        });
+      });
+      const newOrders = this.getNewOrders(listName);
+      this.updateTaskOrders(listName, newOrders);
+      this.taskService.updateOrders(newOrders).subscribe((data: any) => {
+        if (data.success) {}
+      });
+    } else {
+      const oldStatus = event.previousContainer.data;
+      const newStatus = event.container.data;
+      const movedTask = this.filteredTasks.getIn([oldStatus, event.previousIndex]).set('status', newStatus);
+      this.filteredTasks = this.filteredTasks.update(oldStatus, (list) => list.filter((t) => t.get('_id') !== movedTask.get('_id')));
+      this.tasks = this.tasks.update(oldStatus, (list) => list.filter((t) => t.get('_id') !== movedTask.get('_id')));
+      let orders = [];
+      this.filteredTasks = this.filteredTasks.update(newStatus, (list) => {
+        const newList = list.insert(event.currentIndex, movedTask);
+        orders = newList.map((item) => item.get('order')).sort().toJS();
+        return newList.map((list, index) => {
+          return list.set('order', orders[index])
+        });
+      });
+      const newOrders = this.getNewOrders(newStatus);
+      this.updateTaskOrders(newStatus, newOrders);
+      this.taskService.updateOrders(newOrders).subscribe((data: any) => {
+        if (data.success) {}
+      });
+      this.taskService.changeStatus({ oldStatus: oldStatus, newStatus: newStatus, id: movedTask.get('_id')}).subscribe((data) => {});
+    }
+  }
+
+  getNewOrders(listName) {
+    return this.filteredTasks.get(listName).reduce((acc, task) => {
+      acc[task.get('_id')] = task.get('order');
+      return acc;
+    },{});
+  }
+
+  updateTaskOrders(listName, orders) {
+    this.tasks = this.tasks.update(listName, (list) => list.map((t) => {
+      if (orders[t.get('_id')]) return t.set('order', orders[t.get('_id')]);
+      return t;
+    }).sortBy((t) => t.get('order')));
+  }
+
 }

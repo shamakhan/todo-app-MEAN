@@ -1,12 +1,13 @@
 <app-add-task (taskAdded)="taskAdded($event)"></app-add-task>
 <app-task-filters [labels]="labels" (filtersChanged)="filtersChanged($event)"></app-task-filters>
-<div class="task-list-wrapper">
+<div class="task-list-wrapper" cdkDropListGroup>
   <app-task-group
     groupName="New"
     [tasks]="filteredTasks.get('new')"
     (editTask)="editTask($event)"
     (deleteTask)="deleteTask($event)"
     (changeTaskStatus)="changeTaskStatus($event)"
+    (drop)="drop($event)"
   ></app-task-group>
   <app-task-group
     groupName="In_progress"
@@ -14,6 +15,7 @@
     (editTask)="editTask($event)"
     (deleteTask)="deleteTask($event)"
     (changeTaskStatus)="changeTaskStatus($event)"
+    (drop)="drop($event)"
   ></app-task-group>
   <app-task-group
     groupName="Completed"
@@ -24,6 +26,7 @@
     [showDueDate]="false"
     [showArchive]="true"
     (archiveTask)="archiveTask($event)"
+    (drop)="drop($event)"
   ></app-task-group>
 </div>
 <app-task-settings *ngIf="taskToEdit" [settings]="taskToEdit" (saved)="taskEdited($event)" (close)="closeEditDialog()"></app-task-settings>

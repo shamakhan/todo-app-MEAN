@@ -6,6 +6,7 @@ import { FlashMessagesService, FlashMessagesModule } from 'angular2-flash-messag
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {DpDatePickerModule} from 'ng2-date-picker'
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,7 +53,8 @@ import { TaskDetailsComponent } from './components/task-details/task-details.com
     HttpModule,
     FlashMessagesModule,
     MatIconModule,
-    DpDatePickerModule
+    DpDatePickerModule,
+    DragDropModule
   ],
   providers: [
     ValidateService,

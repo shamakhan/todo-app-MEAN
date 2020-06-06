@@ -21,6 +21,7 @@ router.post("/save", (req, res, next) => {
       description: req.body.description || '',
       status: req.body.status || 'new',
       labels: req.body.labels || [],
+      order: req.body.order || 1,
       dueDate: req.body.dueDate || '',
     };
     Task.updateTask(updatedTask, (err, task) => {
@@ -81,6 +82,17 @@ router.get('/archive/:taskId', (req, res, next) => {
       res.json({ success: true, message: "Task(s) archived" });
     } else {
       res.json({ success: false, message: "Could not archive task(s)" });
+    }
+  })
+})
+
+router.post('/update/order', (req, res, next) => {
+  Task.updateOrder(req.body.taskOrders, (err, done) => {
+    if (err) console.log(err);
+    if (done) {
+      res.json({ success: true, message: 'Order updated' });
+    } else {
+      res.json({ success: false, message: 'Could not update order' });
     }
   })
 })

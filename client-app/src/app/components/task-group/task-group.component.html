@@ -10,8 +10,7 @@
       <!-- <button class="btn btn-secondary archive-button">Archive All</button> -->
     </div>
   <!-- </a> -->
-  <div>
-    <div class="card card-body">
+    <div class="card card-body" cdkDropList [cdkDropListData]="groupName.toLowerCase()" (cdkDropListDropped)="drop.emit($event)">
       <app-task-item
        *ngFor="let task of filteredTasks"
         [task]="task.toJS()"
@@ -23,5 +22,4 @@
         (archiveTask)="archiveTask.emit($event)"
       ></app-task-item>
     </div>
-  </div>
 </section>

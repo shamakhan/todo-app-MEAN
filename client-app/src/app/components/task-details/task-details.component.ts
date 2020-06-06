@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class TaskDetailsComponent implements OnInit {
   @Input() task: any;
-  @Input() dueDate: String;
+  @Input() dueDate: any;
   @Output() close: EventEmitter<any> = new EventEmitter();
   objectEntries = Object.entries
 

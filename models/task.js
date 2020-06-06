@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const async = require('async');
 
 const taskSchema = mongoose.Schema({
   title: {
@@ -20,6 +21,10 @@ const taskSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  order: {
+    type: Number,
+    default: 1
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user"
@@ -39,7 +44,10 @@ module.exports.getTasksByIds = (taskIds, callback) => {
 }
 
 module.exports.addTask = (task, callback) => {
-  task.save(callback);
+  Task.count({}, (err, count) => {
+    task.order = count + 1;
+    task.save(callback);
+  });
 }
 
 module.exports.updateTask = (userTask, callback) => {
@@ -53,6 +61,7 @@ module.exports.updateTask = (userTask, callback) => {
       task.status = userTask.status;
       task.labels = userTask.labels;
       task.dueDate = userTask.dueDate;
+      task.order = userTask.order;
       task.save(callback);
     }
   })
@@ -88,4 +97,22 @@ module.exports.archiveTask = (taskId, callback) => {
       }
     });
   }
+}
+
+module.exports.updateOrder = (taskOrders, callback) => {
+  let doneTillNow = [];
+  async.each(Object.keys(taskOrders), (tId, innerCallback) => {
+    Task.updateOne({_id: mongoose.Types.ObjectId(tId) }, { order: taskOrders[tId]}, (err, res) => {
+      if(err || !res) innerCallback(err || "Could not update order");
+      if (res) {
+        doneTillNow.push(res);
+        innerCallback(null);
+      }
+    });
+  }, (err) => {
+    if (err) callback(err, false);
+    if (doneTillNow.length === Object.keys(taskOrders).length) {
+      callback(null, true);
+    }
+  })
 }
