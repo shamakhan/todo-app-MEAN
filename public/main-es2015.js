@@ -949,19 +949,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
 
 
 
+
+function GoogleLoginComponent_div_0_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "span", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, " OR ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "span", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "a", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "img", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} }
 class GoogleLoginComponent {
     constructor(authService, router, route) {
         this.authService = authService;
         this.router = router;
         this.route = route;
+        this.authVerifying = false;
     }
     ngOnInit() {
         this.route.queryParams.subscribe((params) => {
             if (params['token']) {
+                this.authVerifying = true;
                 this.authService.loginWithGoogleId(params.token).subscribe((data) => {
                     if (data.success) {
                         this.authService.storeUserData(data);
@@ -973,18 +989,11 @@ class GoogleLoginComponent {
     }
 }
 GoogleLoginComponent.ɵfac = function GoogleLoginComponent_Factory(t) { return new (t || GoogleLoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"])); };
-GoogleLoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: GoogleLoginComponent, selectors: [["app-google-login"]], decls: 7, vars: 0, consts: [[1, "google-oath"], [1, "separator"], [1, "horizontal-line"], ["href", "/oauth/google"], ["src", "../../../assets/google-auth-image.png", "alt", "google auth image"]], template: function GoogleLoginComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "span", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, " OR ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "span", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "a", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "img", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    } }, styles: [".google-oath[_ngcontent-%COMP%]   .separator[_ngcontent-%COMP%] {\n  color: #aaa;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin: 20px;\n}\n.google-oath[_ngcontent-%COMP%]   .separator[_ngcontent-%COMP%]   .horizontal-line[_ngcontent-%COMP%] {\n  width: 100px;\n  border: 1px solid #aaa;\n  margin: 4px;\n}\n.google-oath[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3NoYW1hL2NvbXBldGl0aW9ucy1wcm9qZWN0L3N0YWNraGFjay10b2RvLWFwcC9jbGllbnQtYXBwL3NyYy9hcHAvY29tcG9uZW50cy9nb29nbGUtbG9naW4vZ29vZ2xlLWxvZ2luLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL2dvb2dsZS1sb2dpbi9nb29nbGUtbG9naW4uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0U7RUFDRSxXQUFBO0VBQ0EsYUFBQTtFQUNBLHVCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0FDQUo7QURFSTtFQUNFLFlBQUE7RUFDQSxzQkFBQTtFQUNBLFdBQUE7QUNBTjtBREdFO0VBQ0UsZUFBQTtBQ0RKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9nb29nbGUtbG9naW4vZ29vZ2xlLWxvZ2luLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdvb2dsZS1vYXRoIHtcbiAgLnNlcGFyYXRvciB7XG4gICAgY29sb3I6ICNhYWE7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIG1hcmdpbjogMjBweDtcblxuICAgIC5ob3Jpem9udGFsLWxpbmUge1xuICAgICAgd2lkdGg6IDEwMHB4O1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgI2FhYTtcbiAgICAgIG1hcmdpbjogNHB4O1xuICAgIH1cbiAgfVxuICBpbWcge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgfVxufSIsIi5nb29nbGUtb2F0aCAuc2VwYXJhdG9yIHtcbiAgY29sb3I6ICNhYWE7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBtYXJnaW46IDIwcHg7XG59XG4uZ29vZ2xlLW9hdGggLnNlcGFyYXRvciAuaG9yaXpvbnRhbC1saW5lIHtcbiAgd2lkdGg6IDEwMHB4O1xuICBib3JkZXI6IDFweCBzb2xpZCAjYWFhO1xuICBtYXJnaW46IDRweDtcbn1cbi5nb29nbGUtb2F0aCBpbWcge1xuICBjdXJzb3I6IHBvaW50ZXI7XG59Il19 */"] });
+GoogleLoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: GoogleLoginComponent, selectors: [["app-google-login"]], decls: 1, vars: 1, consts: [["class", "google-oath", 4, "ngIf"], [1, "google-oath"], [1, "separator"], [1, "horizontal-line"], ["href", "/oauth/google"], ["src", "../../../assets/google-auth-image.png", "alt", "google auth image"]], template: function GoogleLoginComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, GoogleLoginComponent_div_0_Template, 7, 0, "div", 0);
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.authVerifying);
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"]], styles: [".google-oath[_ngcontent-%COMP%]   .separator[_ngcontent-%COMP%] {\n  color: #aaa;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin: 20px;\n}\n.google-oath[_ngcontent-%COMP%]   .separator[_ngcontent-%COMP%]   .horizontal-line[_ngcontent-%COMP%] {\n  width: 100px;\n  border: 1px solid #aaa;\n  margin: 4px;\n}\n.google-oath[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3NoYW1hL2NvbXBldGl0aW9ucy1wcm9qZWN0L3N0YWNraGFjay10b2RvLWFwcC9jbGllbnQtYXBwL3NyYy9hcHAvY29tcG9uZW50cy9nb29nbGUtbG9naW4vZ29vZ2xlLWxvZ2luLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL2dvb2dsZS1sb2dpbi9nb29nbGUtbG9naW4uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0U7RUFDRSxXQUFBO0VBQ0EsYUFBQTtFQUNBLHVCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0FDQUo7QURFSTtFQUNFLFlBQUE7RUFDQSxzQkFBQTtFQUNBLFdBQUE7QUNBTjtBREdFO0VBQ0UsZUFBQTtBQ0RKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9nb29nbGUtbG9naW4vZ29vZ2xlLWxvZ2luLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdvb2dsZS1vYXRoIHtcbiAgLnNlcGFyYXRvciB7XG4gICAgY29sb3I6ICNhYWE7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIG1hcmdpbjogMjBweDtcblxuICAgIC5ob3Jpem9udGFsLWxpbmUge1xuICAgICAgd2lkdGg6IDEwMHB4O1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgI2FhYTtcbiAgICAgIG1hcmdpbjogNHB4O1xuICAgIH1cbiAgfVxuICBpbWcge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgfVxufSIsIi5nb29nbGUtb2F0aCAuc2VwYXJhdG9yIHtcbiAgY29sb3I6ICNhYWE7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBtYXJnaW46IDIwcHg7XG59XG4uZ29vZ2xlLW9hdGggLnNlcGFyYXRvciAuaG9yaXpvbnRhbC1saW5lIHtcbiAgd2lkdGg6IDEwMHB4O1xuICBib3JkZXI6IDFweCBzb2xpZCAjYWFhO1xuICBtYXJnaW46IDRweDtcbn1cbi5nb29nbGUtb2F0aCBpbWcge1xuICBjdXJzb3I6IHBvaW50ZXI7XG59Il19 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](GoogleLoginComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{

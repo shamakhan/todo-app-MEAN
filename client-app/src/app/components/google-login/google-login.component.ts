@@ -8,12 +8,13 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./google-login.component.scss']
 })
 export class GoogleLoginComponent implements OnInit {
-
+  authVerifying: Boolean = false;
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       if (params['token']) {
+        this.authVerifying = true;
         this.authService.loginWithGoogleId(params.token).subscribe((data: any) => {
           if (data.success) {
             this.authService.storeUserData(data);
